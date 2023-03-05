@@ -1,24 +1,21 @@
 const inquirer = require("inquirer");
 const express = require("express");
-const mysql = require("mysql2");
-const database = require("./db")
+const mysql = require("mysql");
 
+const connection = mysql.createConnection({
+    host: 'localHost',
+    port: '3306',
+    user: 'root',
+    password: 'Nr80635!',
+    database: 'employee_db'
+});
 
-
-inquirer.prompt([
-    {
-        name: 'name',
-        message: 'What is your Name?',
-        type: 'input'
+connection.connect(function(error) {
+    if (error) {
+      return console.error('error: ' + error.message);
     }
-]).then(function(answer){
-    console.log(answer);
-})
+    console.log('Connected to the MySQL server.');
+  });
 
-app.post("/api/name", (req, res)=>{
-    console.log(req.body.name)
-    const name = req.body.name
-    const sql = `INSERT INTO department (name) VALUES(?)`
-})
 
  

@@ -1,0 +1,37 @@
+inquirer.prompt([
+    {
+        name: 'name',
+        message: 'What is your Name?',
+        type: 'input'
+    }
+]).then(function(answer){
+    console.log(answer);
+})
+
+app.post("/api/name", (req, res)=>{
+    console.log(req.body.name)
+    const name = req.body.name
+    const sql = `INSERT INTO department (name) VALUES(?)`
+})
+
+var connection = mysql.createConnection[{
+    host: 'localHost',
+    port: '3699', 
+    user: 'root',
+    password: 'Nr80635!',
+    database: 'employee_db'
+}];
+
+connection.connect(function(error){
+    if (error) throw error;
+    console.log("connected as id " + connection.threadId + "\n");
+    query();
+})
+
+function query(){
+    connection.query("SELECT * FROM department", function(error, results){
+        if (error) throw error;
+        console.log('results:', results);
+        connection.end()
+    })
+}

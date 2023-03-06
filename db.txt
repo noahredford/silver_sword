@@ -35,3 +35,22 @@ function query(){
         connection.end()
     })
 }
+
+function addDepartment() {
+    inquirer.prompt ([
+        {
+            type: 'input',
+            message: 'What is the name of the department?',
+            name: 'department_name',
+        }
+    ]).then(function(answers){
+        console.log(answers);
+        connection.query("INSERT INTO department SET ?", {
+            department_name:answers.department_name
+        }, function(error){
+           if (error) throw error;
+           console.log("added dep!")
+        })
+    })
+};
+ 

@@ -18,14 +18,14 @@ function startApp() {
             type: "list",
             message: "Hello! What would you like to do today?",
             name: "choice",
-            choices: ["View All Employees", "Add Employee", "Update An Employee", "All Done"]
+            choices: ["View All Departments", "Add Employee", "Update An Employee", "Add Department", "All Done"]
         }
     ]).then(function(answer){
-        if(answer.choice === "View All Employees"){
-            viewEmployees();
+        if(answer.choice === "View All Departments"){
+            viewDepartments();
         } 
-        else if(answer.choice === "Add Employee"){
-            addEmployee();
+        else if(answer.choice === "Add Department"){
+            addDepartment();
         }
         else if(answer.choice === "Update An Employee"){
             updateEmployee();
@@ -38,14 +38,33 @@ function startApp() {
     })
 };
 
-function viewEmployees(){
-    console.log('Here are your employees!')
+function viewDepartments(){ // VIEW DEPARTMENTS DONE
+    connection.query("SELECT * FROM department", function(error, results){
+        if(error) throw error;
+        console.table(results);
+        startApp();
+    })
 };
 
-function addEmployee(){
-    console.log("Add an employee here!")
-
+function addDepartment(){ // ADD DEPARTMENT DONE
+    console.log("Add an Department here!")
+    inquirer.prompt ([
+        {
+            type: 'input',
+            message: 'What is the name of the department?',
+            name: 'department_name',
+        }
+    ]).then(function(answers){
+        connection.query("INSERT INTO department SET ?", {
+            department_name:answers.department_name
+        }, function(error){
+           if (error) throw error;
+           console.log("Success!")
+           startApp();
+        })
+    })
 };
+
 
 function updateEmployee(){
     console.log("Update employee here!")

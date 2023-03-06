@@ -87,7 +87,42 @@ function viewEmployees(){
 
 function addEmployee(){
     console.log("Add an employee here!")
-    startApp();
+    inquirer.prompt ([
+        {
+            type: 'input',
+            message: 'What is the ID number for the employee?',
+            name: 'employee_id',
+        },
+        {
+            type: 'input',
+            message: 'What is the employees first name?',
+            name: 'first_name',
+        },
+        {
+            type: 'input',
+            message: 'What is the employees last name?',
+            name: 'last_name',
+        },
+        {
+            type: 'input',
+            message: 'What is the Role ID for this employees position?',
+            name: 'role_id',
+        },
+        {
+            type: 'input',
+            message: 'Who is the manager for this employee?',
+            name: 'manager_id',
+        },
+
+    ]).then(function(answers){
+        connection.query("INSERT INTO employee SET ?", {
+            id:answers.employee_id, first_name:answers.first_name, last_name:answers.last_name, role_id:answers.role_id, manager:answers.manager
+        }, function(error){
+           if (error) throw error;
+           console.log("Success!")
+           startApp();
+        })
+    })
 };
 
 function viewRoles(){
@@ -101,7 +136,36 @@ function viewRoles(){
 
 function updateRole(){
     console.log("Update employee role here!")
-    startApp();
+    inquirer.prompt ([
+        {
+            type: 'input',
+            message: 'What is the Role ID for this position?',
+            name: 'role_id',
+        },
+        {
+            type: 'input',
+            message: 'What is the title for this position?',
+            name: 'title',
+        },
+        {
+            type: 'input',
+            message: 'What is the salary for this position?',
+            name: 'salary',
+        },
+        {
+            type: 'input',
+            message: 'What is the department ID for this position?',
+            name: 'department_id',
+        }
+    ]).then(function(answers){
+        connection.query("INSERT INTO position SET ?", {
+            role_id:answers.role_id, title:answers.title, salary:answers.salary, department_id:answers.department_id
+        }, function(error){
+           if (error) throw error;
+           console.log("Success!")
+           startApp();
+        })
+    })
 };
 
 

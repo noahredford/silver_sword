@@ -76,8 +76,12 @@ function addDepartment(){ // ADD DEPARTMENT DONE
 
 
 function viewEmployees(){
-    console.log("Here are your employees!")
-    startApp();
+    console.log("Here are your employees!");
+    connection.query("SELECT * FROM employee", function(error, results){
+        if(error) throw error;
+        console.table(results);
+        startApp();
+    })
 };
 
 
@@ -87,8 +91,12 @@ function addEmployee(){
 };
 
 function viewRoles(){
-    console.log("Here are your roles!")
-    startApp();
+    console.log("Here are your roles!");
+    connection.query("SELECT * FROM position", function(error, results){
+        if(error) throw error;
+        console.table(results);
+        startApp();
+    })
 };
 
 function updateRole(){

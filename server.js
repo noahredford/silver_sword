@@ -18,7 +18,7 @@ function startApp() {
             type: "list",
             message: "Hello! What would you like to do today?",
             name: "choice",
-            choices: ["View All Departments", "Add Employee", "Update An Employee", "Add Department", "All Done"]
+            choices: ["View All Departments", "Add Department", "View Employees", "Add An Employee", "View Roles", "Update Employee Role", "All Done"]
         }
     ]).then(function(answer){
         if(answer.choice === "View All Departments"){
@@ -27,8 +27,17 @@ function startApp() {
         else if(answer.choice === "Add Department"){
             addDepartment();
         }
-        else if(answer.choice === "Update An Employee"){
-            updateEmployee();
+        else if(answer.choice === "View Employees"){
+            viewEmployees();
+        }
+        else if(answer.choice === "Add An Employee"){
+            addEmployee();
+        }
+        else if(answer.choice === "View Roles"){
+            viewRoles();
+        }
+        else if(answer.choice === "Update Employee Role"){
+            updateRole();
         }
         else if(answer.choice === "All Done"){
             console.log("Bye!")
@@ -66,10 +75,26 @@ function addDepartment(){ // ADD DEPARTMENT DONE
 };
 
 
-function updateEmployee(){
-    console.log("Update employee here!")
+function viewEmployees(){
+    console.log("Here are your employees!")
+    startApp();
 };
 
+
+function addEmployee(){
+    console.log("Add an employee here!")
+    startApp();
+};
+
+function viewRoles(){
+    console.log("Here are your roles!")
+    startApp();
+};
+
+function updateRole(){
+    console.log("Update employee role here!")
+    startApp();
+};
 
 
 
